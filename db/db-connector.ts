@@ -18,6 +18,6 @@ export default async function connectToDatabase() {
     const uri = process.env.MONGODB_URI;
     if (!uri) throw new RequestError(500, "No MongoDB URI found");
 
-    db = await mongoose.connect(uri) as DB;
+    db = await mongoose.connect(uri, { dbName: 'disaster' }) as DB;
     return db;
 }
