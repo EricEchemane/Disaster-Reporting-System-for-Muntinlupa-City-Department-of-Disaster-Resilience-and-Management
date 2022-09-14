@@ -21,7 +21,11 @@ export default function Home() {
 
     <Container style={{ paddingTop: '1rem' }}>
       <Header />
-      <Stack py='2rem' m='auto' spacing={5} alignItems="center" style={{ width: 'min(100%, 450px)' }}>
+      <Stack
+        py='2rem' m='auto'
+        spacing={5}
+        alignItems="stretch"
+        style={{ width: 'min(100%, 450px)' }}>
 
         <FormControl fullWidth>
           <InputLabel id="role-select">Role</InputLabel>
