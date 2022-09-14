@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+export type incidents = "Earthquake" | "Flood" | "Fires" | "Vehicle accident" | "Clearing operation" | "Traffic" | "Obstruction in barangay" | string;
+
 export const callerSchema = new mongoose.Schema({
     fullName: {
         type: String,
@@ -25,6 +27,10 @@ export const callerSchema = new mongoose.Schema({
             validator: (url: string) => url.startsWith('https://'),
             message: "Invalid image url",
         }
+    },
+    incident: {
+        type: String,
+        required: [true, "Please describe the incident"],
     },
     createdAt: {
         type: Date,
