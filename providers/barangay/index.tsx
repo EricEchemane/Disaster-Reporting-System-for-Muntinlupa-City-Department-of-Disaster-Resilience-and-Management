@@ -13,14 +13,6 @@ interface IBarangayContext {
 
 export const useBarangayContext = () => useContext<IBarangayContext>(BarangayContext);
 
-// const initialValues: IBarangay = {
-//     name: '',
-//     password: '',
-//     reportedIncidents: [],
-//     createdAt: new Date(),
-//     updatedAt: new Date(),
-// };
-
 export default function BarangayProvider(props: { children: JSX.Element; }) {
     const context = useReducer(reducer, undefined);
     return (
