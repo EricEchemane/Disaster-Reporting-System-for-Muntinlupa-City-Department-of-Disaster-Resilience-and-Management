@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-class RequestError {
+export class RequestError {
     success = false;
     code: number;
     message: string;
@@ -10,7 +10,7 @@ class RequestError {
     }
 }
 
-class SuccessfulRequest {
+export class SuccessfulRequest {
     success = true;
     data: any;
     constructor(data: any) {
@@ -41,6 +41,9 @@ export default function normalize(
 
             if (error.message.includes('E11000')) {
                 error.message = 'This email is already used';
+            }
+            if (error instanceof RequestError) {
+                return res.status(error.code).json(error);
             }
 
             return res.status(500).json(new RequestError(500, error.message));
