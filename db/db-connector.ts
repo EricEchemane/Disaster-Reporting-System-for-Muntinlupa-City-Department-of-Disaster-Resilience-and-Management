@@ -1,3 +1,4 @@
+import Barangay from "entities/barangay.entity";
 import Caller from "entities/caller.entity";
 import { RequestError } from "http_adapters/response-normalizer";
 import mongoose from "mongoose";
@@ -5,6 +6,7 @@ import mongoose from "mongoose";
 type DB = typeof mongoose & {
     models: {
         Caller: typeof Caller;
+        Barangay: typeof Barangay;
     };
 };
 
