@@ -1,8 +1,13 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import BarangayProvider from 'providers/barangay';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <BarangayProvider>
+      <Component {...pageProps} />
+    </BarangayProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
