@@ -5,6 +5,7 @@ const barangaySchema = new mongoose.Schema({
         type: String,
         required: [true, "Barangay name is required"],
         minLength: [3, "Barangay name must be at least 3 characters long"],
+        unique: true,
     },
     password: {
         type: String,
