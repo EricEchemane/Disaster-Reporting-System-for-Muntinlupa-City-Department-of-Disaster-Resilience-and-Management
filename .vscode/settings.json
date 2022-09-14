@@ -2,6 +2,7 @@
   "files.exclude": {
     "node_modules": true,
     ".next": true,
-    ".vscode": true
+    ".vscode": true,
+    "styles": true
   }
 }
