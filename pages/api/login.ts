@@ -5,7 +5,7 @@ import { NextApiRequest } from "next";
 async function handler(req: NextApiRequest) {
     if (req.method !== 'POST') throw new RequestError(405, 'Method not allowed');
     const { name, password, userType, username } = req.body;
-    if (!name || !password || !userType) throw new RequestError(400, 'Something is missing');
+    if (!password || !userType) throw new RequestError(400, 'Something is missing');
 
     if (userType === 'brgy') {
         const db = await connectToDatabase();
