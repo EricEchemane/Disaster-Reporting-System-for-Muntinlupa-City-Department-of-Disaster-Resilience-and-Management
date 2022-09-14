@@ -19,6 +19,10 @@ const barangaySchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    reportedIncidents: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Caller",
+    }]
 });
 
 barangaySchema.pre('save', function (next) {
