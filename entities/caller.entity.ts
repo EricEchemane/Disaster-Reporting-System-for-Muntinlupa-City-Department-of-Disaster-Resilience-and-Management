@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const callerSchema = new mongoose.Schema({
+export const callerSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: [true, "Full naem is required"],
@@ -43,6 +43,6 @@ callerSchema.pre('save', function (next) {
 
 export type ICaller = mongoose.InferSchemaType<typeof callerSchema>;
 
-const Caller = mongoose.model('Caller', callerSchema);
+const Caller = mongoose.models.Caller || mongoose.model('Caller', callerSchema);
 
 export default Caller;

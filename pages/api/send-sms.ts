@@ -1,4 +1,4 @@
-import smsService from '@utils/iwilio';
+import smsService from 'utils/iwilio';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
