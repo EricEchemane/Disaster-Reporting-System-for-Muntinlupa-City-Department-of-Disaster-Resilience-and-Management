@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Cookie } from 'next-cookie';
 
 export class RequestError {
     success = false;
@@ -20,16 +21,18 @@ export class SuccessfulRequest {
 
 export default function normalize(
     handler: Function,
-    options: { protect: boolean; } = { protect: false }
+    options: { protect: boolean; } = { protect: true }
 ) {
     return async function (
         req: NextApiRequest,
         res: NextApiResponse<SuccessfulRequest | RequestError>) {
 
         if (options.protect === true) {
-            return res.status(401).json(
-                new RequestError(401, 'You are not authorized to access this resource')
-            );
+            const cookie = Cookie.fromApiRoute(req, res);
+
+            // return res.status(401).json(
+            //     new RequestError(401, 'You are not authorized to access this resource')
+            // );
         }
 
         try {

@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, PreviewData } from "next";
 import { useCookie } from "next-cookie";
 import { ParsedUrlQuery } from "querystring";
 
-interface ICookie {
+export interface ICookie {
     type: "brgy" | "admin";
     _id: string;
 }
