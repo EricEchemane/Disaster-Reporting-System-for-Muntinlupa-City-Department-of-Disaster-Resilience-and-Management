@@ -1,6 +1,5 @@
+import { getCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Cookie } from 'next-cookie';
-import { ICookie } from "utils/route-guard";
 
 export class RequestError {
     success = false;
@@ -20,19 +19,27 @@ export class SuccessfulRequest {
     }
 }
 
+export class WithCookieResponse {
+    success = true;
+    justSet = true;
+    cookieValue: any;
+    constructor(data: any) {
+        this.cookieValue = data;
+    }
+}
+
 export default function normalize(
     handler: Function,
     options: { protect: boolean; } = { protect: true }
 ) {
     return async function (
         req: NextApiRequest,
-        res: NextApiResponse<SuccessfulRequest | RequestError>) {
+        res: NextApiResponse<SuccessfulRequest | RequestError | WithCookieResponse>) {
 
-        let credentials: ICookie | undefined = undefined;
+        let credentials;
 
         if (options.protect === true) {
-            const cookie = Cookie.fromApiRoute(req, res);
-            credentials = cookie.get("disaster");
+            credentials = getCookie('disaster', { req, res });
             if (!credentials) return res.status(401).json(
                 new RequestError(401, 'You are not authorized to access this resource')
             );
@@ -40,13 +47,6 @@ export default function normalize(
 
         try {
             const data = await handler(req, credentials);
-
-            // create cookie if route is login
-            if (req.url === '/api/login') {
-                const cookie = Cookie.fromApiRoute(req, res);
-                cookie.set('disaster', data);
-            }
-
             return res.status(200).json(new SuccessfulRequest(data));
         } catch (error: any) {
             console.error('\n\n==> Error from:', req.url);

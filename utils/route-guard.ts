@@ -1,6 +1,6 @@
+import { getCookie } from "cookies-next";
 import connectToDatabase from "db/db-connector";
 import { GetServerSidePropsContext, PreviewData } from "next";
-import { useCookie } from "next-cookie";
 import { ParsedUrlQuery } from "querystring";
 
 export interface ICookie {
@@ -9,10 +9,9 @@ export interface ICookie {
 }
 
 export default function routeGuard() {
-    return async (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const cookie = useCookie(context);
-        const loginCredentials: ICookie = cookie.get('disaster');
+    return async ({ req, res }: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
+
+        const loginCredentials: any = getCookie("disaster", { req, res });
 
         if (!loginCredentials) return {
             redirect: {
