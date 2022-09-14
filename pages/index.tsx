@@ -27,7 +27,7 @@ export default function Home() {
         alignItems="stretch"
         style={{ width: 'min(100%, 450px)' }}>
 
-        <FormControl fullWidth>
+        <FormControl style={{ marginTop: '2rem' }} fullWidth>
           <InputLabel id="role-select">Role</InputLabel>
           <Select
             labelId="role-select"
