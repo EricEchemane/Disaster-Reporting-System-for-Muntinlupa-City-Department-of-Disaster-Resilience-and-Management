@@ -28,16 +28,18 @@ export default function normalize(
         req: NextApiRequest,
         res: NextApiResponse<SuccessfulRequest | RequestError>) {
 
+        let credentials: ICookie | undefined = undefined;
+
         if (options.protect === true) {
             const cookie = Cookie.fromApiRoute(req, res);
-            const credentials: ICookie = cookie.get("disaster");
+            credentials = cookie.get("disaster");
             if (!credentials) return res.status(401).json(
                 new RequestError(401, 'You are not authorized to access this resource')
             );
         }
 
         try {
-            const data = await handler(req);
+            const data = await handler(req, credentials);
             return res.status(200).json(new SuccessfulRequest(data));
         } catch (error: any) {
             console.error('\n\n==> Error from:', req.url);
