@@ -40,6 +40,13 @@ export default function normalize(
 
         try {
             const data = await handler(req, credentials);
+
+            // create cookie if route is login
+            if (req.url === '/api/login') {
+                const cookie = Cookie.fromApiRoute(req, res);
+                cookie.set('disaster', data);
+            }
+
             return res.status(200).json(new SuccessfulRequest(data));
         } catch (error: any) {
             console.error('\n\n==> Error from:', req.url);
