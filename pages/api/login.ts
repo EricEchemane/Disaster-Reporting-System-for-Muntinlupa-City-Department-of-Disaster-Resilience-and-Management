@@ -1,11 +1,11 @@
 import connectToDatabase from "db/db-connector";
-import { RequestError } from "http_adapters/response-normalizer";
+import normalize, { RequestError } from "http_adapters/response-normalizer";
 import { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from 'cookies-next';
 
 const COOKIE_KEY = "disaster";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') throw new RequestError(405, 'Method not allowed');
     const { name, password, userType, username } = req.body;
     if (!password || !userType) throw new RequestError(400, 'Something is missing');
@@ -21,11 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             JSON.stringify(barangay),
             { req, res, maxAge: 60 * 60 * 24 }
         );
-        res.status(200).json({
-            success: true,
-            data: barangay,
-            userType: 'brgy'
-        });
+        return { userType: 'brgy' };
     }
     else if (userType === 'admin') {
         if (!username) throw new RequestError(400, 'Username is missing');
@@ -39,10 +35,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             JSON.stringify({ type: 'admin' }),
             { req, res, maxAge: 60 * 60 * 24 }
         );
-        res.status(200).json({
-            success: true,
-            data: { userType: 'admin' }
-        });
+        return { userType: 'admin' };
     }
-    else res.status(400).json({ success: false, message: 'Invalid user type' });
+    else throw new RequestError(400, 'Invalid user type');
 }
+
+export default normalize(handler);

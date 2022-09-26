@@ -1,15 +1,15 @@
 import smsService from 'utils/iwilio';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import normalize, { RequestError } from 'http_adapters/response-normalizer';
 
-export default async function handler(
+async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
     const { to, body } = JSON.parse(req.body);
-    if (!to || !body) {
-        res.status(400).json({ message: 'Missing phone number or body' });
-    }
+    if (!to || !body) throw new RequestError(400, 'Missing phone number or body');
 
     const message = await smsService.sendSms(to, body);
-    res.status(200).json({ success: true, message });
+    return message;
 }
+export default normalize(handler);
