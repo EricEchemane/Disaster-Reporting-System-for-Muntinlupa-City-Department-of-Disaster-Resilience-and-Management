@@ -1,5 +1,6 @@
 import { Button, Stack, TextField } from "@mui/material";
 import useForm from "hooks/useForm";
+import useNotification from "hooks/useNotification";
 import HttpAdapter from "http_adapters/http-adapter-interface";
 import useHttpAdapter from "http_adapters/useHttpAdapter";
 import { useRouter } from "next/router";
@@ -7,9 +8,11 @@ import { FormEvent } from "react";
 
 export default function AdminLogin() {
     const router = useRouter();
+
+    const notify = useNotification();
     const login = useHttpAdapter(new HttpAdapter('/api/login', 'POST'), {
         onSuccess: () => router.replace('/admin'),
-        onFailed: console.log,
+        onFailed: message => notify(message, 'error'),
     });
 
     const { values, handleChange } = useForm({
