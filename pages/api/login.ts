@@ -40,4 +40,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     else throw new RequestError(400, 'Invalid user type');
 }
 
-export default normalize(handler);
+export default normalize(handler, { protect: false });
