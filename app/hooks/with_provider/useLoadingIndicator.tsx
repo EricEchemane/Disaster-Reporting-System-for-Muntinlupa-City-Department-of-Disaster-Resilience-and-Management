@@ -4,7 +4,8 @@ import { createContext, Dispatch, SetStateAction, useContext, useState } from "r
 const LoadingIndicatorContext = createContext<any>(null);
 
 const useLoadingIndicator = () => useContext<{
-    setVisibility: Dispatch<SetStateAction<boolean>>;
+    show: () => void;
+    hide: () => void;
     isVisible: boolean;
 }>(LoadingIndicatorContext);
 
@@ -12,7 +13,9 @@ export default useLoadingIndicator;
 
 export const LoadingIndicatorProvider = (props: { children: JSX.Element; }) => {
     const [isVisible, setVisibility] = useState(false);
-    return <LoadingIndicatorContext.Provider value={{ setVisibility, isVisible }}>
+    const show = () => setVisibility(true);
+    const hide = () => setVisibility(false);
+    return <LoadingIndicatorContext.Provider value={{ isVisible, show, hide }}>
         {isVisible && <LinearProgress />}
         {props.children}
     </LoadingIndicatorContext.Provider>;

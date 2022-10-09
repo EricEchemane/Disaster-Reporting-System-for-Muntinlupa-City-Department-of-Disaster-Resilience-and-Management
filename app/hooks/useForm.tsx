@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function useForm(
     initialValues: { [key: string]: any; },
-    validators?: { [key: string]: (value: string) => string | void; }
+    validators?: { [key: string]: (value: any) => string | void; }
 ) {
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState<any>();
@@ -19,7 +19,10 @@ export default function useForm(
                 }
             }
         });
-        if (noErrors) return null;
+        if (noErrors) {
+            setErrors(null);
+            return null;
+        }
         setErrors(errors);
         return errors;
     };
@@ -29,5 +32,5 @@ export default function useForm(
         setValues(values => ({ ...values, [name]: value }));
     };
 
-    return { values, handleChange, validate, errors, setValues };
+    return { errors, values, handleChange, validate, setValues };
 }

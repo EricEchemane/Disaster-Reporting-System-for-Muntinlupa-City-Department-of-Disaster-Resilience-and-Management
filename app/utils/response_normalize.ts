@@ -1,5 +1,5 @@
-import { getCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getToken } from "next-auth/jwt";
 
 export class RequestError {
     success = false;
@@ -19,41 +19,33 @@ export class SuccessfulRequest {
     }
 }
 
-export class WithCookieResponse {
-    success = true;
-    justSet = true;
-    cookieValue: any;
-    constructor(data: any) {
-        this.cookieValue = data;
-    }
-}
-
 export default function normalize(
     handler: Function,
     options: { protect: boolean; } = { protect: true }
 ) {
     return async function (
         req: NextApiRequest,
-        res: NextApiResponse<SuccessfulRequest | RequestError | WithCookieResponse>) {
+        res: NextApiResponse<SuccessfulRequest | RequestError>) {
 
-        let credentials;
+        const token = await getToken({ req });
 
-        if (options.protect === true) {
-            credentials = getCookie('disaster', { req, res });
-            if (!credentials) return res.status(401).json(
+        if (options.protect === true && !token) {
+            return res.status(401).json(
                 new RequestError(401, 'You are not authorized to access this resource')
             );
         }
 
         try {
-            const data = await handler(req, credentials);
+            const data = await handler(req, token);
             return res.status(200).json(new SuccessfulRequest(data));
         } catch (error: any) {
-            console.error('\n\n==> Error from:', req.url);
-            console.error(error.message);
+            console.error('ERROR: ', {
+                message: error.message,
+                origin: req.url,
+            });
 
             if (error.message.includes('E11000')) {
-                error.message = 'This email is already used';
+                error.message = 'This email is already in use';
             }
             if (error.message.includes(':')) {
                 const idx1 = (error.message as string).indexOf(':');

@@ -18,12 +18,27 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "components/*": [
+        "app/components/*"
+      ],
+      "hooks/*": [
+        "app/hooks/*"
+      ],
+      "utils/*": [
+        "app/utils/*"
+      ],
+      "db/*": [
+        "app/db/*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "process.d.ts"
   ],
   "exclude": [
     "node_modules"
