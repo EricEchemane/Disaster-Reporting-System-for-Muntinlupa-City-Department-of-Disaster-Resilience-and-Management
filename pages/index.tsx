@@ -1,4 +1,4 @@
-import { Button, Container, CopyButton, Group, Text } from "@mantine/core";
+import { Button, Container, CopyButton, Group, Text, Title } from "@mantine/core";
 import { IconArrowRight, IconPlayerPlay } from "@tabler/icons";
 import Head from "next/head";
 import Image from "next/image";
@@ -17,9 +17,9 @@ export default function HomePage() {
       <Group position={'apart'} my={'md'}>
         <Group>
           <Image width={50} height={50} alt={'muntinlupa logo'} src={logo} />
-          <h2>
+          <Title order={3}>
             Disaster Resilience Department
-          </h2>
+          </Title>
         </Group>
         <Link passHref href={'/report-incident'}>
           <Button color={'red'} rightIcon={<IconArrowRight />} variant={'filled'} component={'a'}>
