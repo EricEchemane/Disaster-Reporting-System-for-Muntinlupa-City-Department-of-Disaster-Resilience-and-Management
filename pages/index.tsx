@@ -1,9 +1,10 @@
-import { Button, Container, CopyButton, Group, Text, Title } from "@mantine/core";
+import { Button, Container, CopyButton, Group, Text } from "@mantine/core";
 import { IconArrowRight, IconPlayerPlay } from "@tabler/icons";
 import Head from "next/head";
 import Image from "next/image";
 import logo from "../public/muntinlupa-logo.png";
 import heroImage from "../public/assets/hero-image.jpg";
+import Link from "next/link";
 
 export default function HomePage() {
 
@@ -16,9 +17,9 @@ export default function HomePage() {
       <Group position={'apart'} my={'md'}>
         <Group>
           <Image width={50} height={50} alt={'muntinlupa logo'} src={logo} />
-          <Title order={4}>
+          <h2>
             Disaster Resilience Department
-          </Title>
+          </h2>
         </Group>
         <Button color={'red'} rightIcon={<IconArrowRight />} variant={'filled'}>
           Report Incident
@@ -36,9 +37,11 @@ export default function HomePage() {
             )}
           </CopyButton>
         </Group>
-        <Button rightIcon={<IconPlayerPlay />} variant={'light'}>
-          Video Tutorial: How to submit a report?
-        </Button>
+        <Link passHref href={'/how-to-submit-report'}>
+          <Button rightIcon={<IconPlayerPlay />} variant={'light'} component='a'>
+            Video Tutorial: How to submit a report?
+          </Button>
+        </Link>
       </Group>
 
       <Image alt="hero image" src={heroImage} style={{ borderRadius: "1rem" }} />
