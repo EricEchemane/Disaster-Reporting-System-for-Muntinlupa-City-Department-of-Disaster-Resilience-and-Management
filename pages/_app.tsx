@@ -1,10 +1,11 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import UserContextProvider from 'app/user.context';
-import { LoadingIndicatorProvider } from 'hooks/with_provider/useLoadingIndicator';
-import { NotificationProvider } from 'hooks/with_provider/useNotification';
-import { AlertDialogProvider } from 'hooks/with_provider/useAlertDialog';
-import { ConfirmDialogProvider } from 'hooks/with_provider/useConfirmDialog';
+import Head from 'next/head';
+import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from '@mantine/modals';
+import { NotificationsProvider } from '@mantine/notifications';
+import { NavigationProgress } from '@mantine/nprogress';
+import UserContextProvider from 'contexts/user.context';
 import { SessionProvider } from 'next-auth/react';
 
 interface AppPropsWithSession extends AppProps {
@@ -13,19 +14,31 @@ interface AppPropsWithSession extends AppProps {
 
 function MyApp({ Component, pageProps }: AppPropsWithSession) {
   return (
-    <SessionProvider session={pageProps.session}>
-      <UserContextProvider>
-        <LoadingIndicatorProvider>
-          <NotificationProvider>
-            <AlertDialogProvider>
-              <ConfirmDialogProvider>
+    <>
+      <Head>
+        <title>Page title</title>
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+      </Head>
+      <SessionProvider session={pageProps.session}>
+        <UserContextProvider>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{
+              /** Put your mantine theme override here */
+              colorScheme: 'light',
+              fontFamily: "Inter, sans-serif"
+            }}>
+            <ModalsProvider>
+              <NotificationsProvider>
+                <NavigationProgress />
                 <Component {...pageProps} />
-              </ConfirmDialogProvider>
-            </AlertDialogProvider>
-          </NotificationProvider>
-        </LoadingIndicatorProvider>
-      </UserContextProvider>
-    </SessionProvider>
+              </NotificationsProvider>
+            </ModalsProvider>
+          </MantineProvider>
+        </UserContextProvider>
+      </SessionProvider>
+    </>
   );
 }
 

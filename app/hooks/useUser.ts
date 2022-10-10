@@ -1,4 +1,4 @@
-import { useUserContext } from "app/user.context";
+import { useUserContext } from "contexts/user.context";
 import Router from "next/router";
 import { useEffect } from "react";
 import useFetch from "./useFetch";

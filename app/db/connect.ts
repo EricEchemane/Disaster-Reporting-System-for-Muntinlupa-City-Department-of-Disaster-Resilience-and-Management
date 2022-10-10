@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import userSchema from './user.schema';
+import userSchema from './schemas/user';
 
 let database: typeof mongoose | null = null;
 

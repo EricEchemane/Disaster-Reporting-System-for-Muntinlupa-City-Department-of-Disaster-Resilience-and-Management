@@ -1,3 +1,3 @@
-# Web-based Disaster Reporting System for Muntinlupa City Department of Disaster Resilience and Management using SMS Notification
+# Disaster Resilience Reporting System
 
-**Bootstrapped using [Full Stack Next](https://github.com/EricEchemane/full-stack-next)**
+**Bootstrapped with [Full Stack Next Mantine](https://github.com/EricEchemane/Full-Stack-Next-Mantine)**

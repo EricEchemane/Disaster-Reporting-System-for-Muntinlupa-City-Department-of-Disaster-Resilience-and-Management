@@ -1,4 +1,4 @@
-import { IUser } from 'db/user.schema';
+import { IUser } from 'db/schemas/user';
 import { useContext, useReducer } from 'react';
 import { createContext } from 'react';
 

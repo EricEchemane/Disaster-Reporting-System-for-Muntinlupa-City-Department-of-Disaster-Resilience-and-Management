@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import connectToDatabase from "db/connect";
 import { NextApiRequest } from "next";
 import { JWT } from "next-auth/jwt";
-import normalize, { RequestError } from "utils/response_normalize";
+import normalize, { RequestError } from "http/response_normalizer";
 
 async function handler(req: NextApiRequest, token: JWT) {
     if (req.method !== "POST") throw new RequestError(405, "Method not allowed");

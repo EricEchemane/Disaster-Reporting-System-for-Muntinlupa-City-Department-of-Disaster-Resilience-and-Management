@@ -23,22 +23,27 @@
       "components/*": [
         "app/components/*"
       ],
-      "hooks/*": [
-        "app/hooks/*"
+      "db/*": [
+        "app/db/*"
       ],
       "utils/*": [
         "app/utils/*"
       ],
-      "db/*": [
-        "app/db/*"
-      ]
+      "hooks/*": [
+        "app/hooks/*"
+      ],
+      "contexts/*": [
+        "app/contexts/*"
+      ],
+      "http/*": [
+        "app/http/*"
+      ],
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "process.d.ts"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules"

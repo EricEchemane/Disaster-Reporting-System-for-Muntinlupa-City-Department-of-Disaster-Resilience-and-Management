@@ -1,20 +1,13 @@
+import { RequestError, SuccessfulRequest } from 'http/response_normalizer';
 import React from 'react';
-import { RequestError, SuccessfulRequest } from 'utils/response_normalize';
-import useLoadingIndicator from './with_provider/useLoadingIndicator';
-
-interface FetchOptions {
-    fetchOnMount?: boolean;
-}
 
 export default function useFetch(
     url: string,
-    options: FetchOptions = { fetchOnMount: true }) {
+    options = { fetchOnMount: true }) {
     const [data, setData] = React.useState<SuccessfulRequest | null>(null);
     const [error, setError] = React.useState<RequestError | null>(null);
-    const loadingIndicator = useLoadingIndicator();
 
     const get = React.useCallback(async () => {
-        loadingIndicator.show();
         const response = await fetch(url);
         const json = await response.json();
         if (response.ok) {
@@ -22,7 +15,6 @@ export default function useFetch(
         } else {
             setError(json);
         }
-        loadingIndicator.hide();
         return json;
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
