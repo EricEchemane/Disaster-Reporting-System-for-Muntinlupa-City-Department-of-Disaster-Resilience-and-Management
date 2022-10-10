@@ -21,9 +21,11 @@ export default function HomePage() {
             Disaster Resilience Department
           </h2>
         </Group>
-        <Button color={'red'} rightIcon={<IconArrowRight />} variant={'filled'}>
-          Report Incident
-        </Button>
+        <Link passHref href={'/report-incident'}>
+          <Button color={'red'} rightIcon={<IconArrowRight />} variant={'filled'} component={'a'}>
+            Report Incident
+          </Button>
+        </Link>
       </Group>
 
       <Group my={'md'} position={'apart'}>
@@ -38,7 +40,7 @@ export default function HomePage() {
           </CopyButton>
         </Group>
         <Link passHref href={'/how-to-submit-report'}>
-          <Button rightIcon={<IconPlayerPlay />} variant={'light'} component='a'>
+          <Button rightIcon={<IconPlayerPlay />} variant={'light'} component={'a'}>
             Video Tutorial: How to submit a report?
           </Button>
         </Link>
