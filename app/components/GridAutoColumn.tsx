@@ -3,7 +3,7 @@ import { useViewportSize } from '@mantine/hooks';
 
 type Props = {
     widthBasis: number;
-    children: JSX.Element[];
+    children: JSX.Element | JSX.Element[];
     spacing?: number | "xs" | "sm" | "md" | "lg" | "xl";
 };
 
