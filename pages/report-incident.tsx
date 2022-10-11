@@ -1,4 +1,4 @@
-import { Button, Container, Group, Select, Stack, TextInput, Title } from '@mantine/core';
+import { Button, Container, Group, Select, Stack, Textarea, TextInput, Title } from '@mantine/core';
 import Head from 'next/head';
 import muntiLogo from "../public/muntinlupa-logo.png";
 import ddrmLogo from "../public/ddrm.png";
@@ -88,6 +88,13 @@ export default function ReportIncidentPage() {
                         {...form.getInputProps('address')}
                         label={'Address'}
                         placeholder={'Your address here'} />
+                    <Textarea
+                        required
+                        size='lg'
+                        minLength={10}
+                        {...form.getInputProps('reportBody')}
+                        label='Describe the incident here'
+                        placeholder='Describe the incident here' />
                     <DropZoneComponent
                         error={form.errors.incidentPhoto?.toString()}
                         onDrop={handleDrop}
