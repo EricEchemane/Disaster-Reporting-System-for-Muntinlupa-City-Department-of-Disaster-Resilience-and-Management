@@ -38,6 +38,9 @@
       "http/*": [
         "app/http/*"
       ],
+      "lib/*": [
+        "app/lib/*"
+      ],
     }
   },
   "include": [
