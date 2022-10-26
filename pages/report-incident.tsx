@@ -32,7 +32,7 @@ export default function ReportIncidentPage() {
         e.preventDefault();
         const errors = form.validate();
         if (errors.hasErrors) return;
-        const payload: Incident = {
+        const payload: Partial<Incident> = {
             description: form.values.reportBody,
             location: form.values.brgy,
             photos: form.values.incidentPhoto,
