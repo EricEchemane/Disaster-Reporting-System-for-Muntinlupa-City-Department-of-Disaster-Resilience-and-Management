@@ -1,9 +1,9 @@
 import { Schema, InferSchemaType } from 'mongoose';
 
-const incidentReportSchema = new Schema({
-    brgyLocation: { type: String, required: true },
+const incident = new Schema({
+    location: { type: String, required: true },
     description: { type: String, required: true },
-    images: { type: String, required: true },
+    photos: { type: String, required: true },
     reporter: {
         type: {
             fullName: { type: String, required: true },
@@ -14,5 +14,5 @@ const incidentReportSchema = new Schema({
     },
 });
 
-export type IIncidentReport = InferSchemaType<typeof incidentReportSchema>;
-export default incidentReportSchema;
+export type Incident = InferSchemaType<typeof incident>;
+export default incident;
