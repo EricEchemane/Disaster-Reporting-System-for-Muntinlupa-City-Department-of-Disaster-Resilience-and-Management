@@ -4,12 +4,15 @@ import muntiLogo from "../public/muntinlupa-logo.png";
 import ddrmLogo from "../public/ddrm.png";
 import Image from 'next/image';
 import { useForm } from '@mantine/form';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import barangays from 'lib/barangays';
 import DropZoneComponent from 'components/DropZone';
 import { FileWithPath } from '@mantine/dropzone';
+import Http from 'http/adapter';
+import { Incident } from 'db/incident_report.schema';
 
 export default function ReportIncidentPage() {
+    const [loading, setLoading] = useState(false);
     const form = useForm({
         initialValues: {
             brgy: '',
@@ -25,16 +28,35 @@ export default function ReportIncidentPage() {
         }
     });
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const errors = form.validate();
         if (errors.hasErrors) return;
+        const payload: Incident = {
+            description: form.values.reportBody,
+            location: form.values.brgy,
+            photos: form.values.incidentPhoto,
+            reporter: {
+                fullName: form.values.fullName,
+                address: form.values.address,
+                contactNumber: form.values.contactNumber,
+            }
+        };
+        Http.post('/api/incident', payload, {
+            loadingToggler: setLoading,
+            onFail: console.log,
+            onSuccess: console.log,
+        });
     };
 
     const handleDrop = (files: FileWithPath[]) => {
         const file = files[0];
         if (!file) return;
-        form.setFieldValue('incidentPhoto', URL.createObjectURL(file));
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            form.setFieldValue('incidentPhoto', reader.result as string);
+        };
     };
 
     return <>
@@ -104,8 +126,9 @@ export default function ReportIncidentPage() {
                         size='lg'
                         type='submit'
                         mt={'3rem'}
+                        disabled={loading}
                         fullWidth>
-                        Submit
+                        {loading ? 'Loading...' : 'Submit'}
                     </Button>
                 </Stack>
             </form>
