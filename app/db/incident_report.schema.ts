@@ -1,6 +1,6 @@
 import { Schema, InferSchemaType } from 'mongoose';
 
-const incident = new Schema({
+const incidentSchema = new Schema({
     location: { type: String, required: true },
     description: { type: String, required: true },
     photos: { type: String, required: true },
@@ -14,5 +14,5 @@ const incident = new Schema({
     },
 });
 
-export type Incident = InferSchemaType<typeof incident>;
-export default incident;
+export type Incident = InferSchemaType<typeof incidentSchema>;
+export default incidentSchema;
