@@ -50,10 +50,10 @@ export default function DropZoneComponent(props: Partial<DropImageProps>) {
                     </Stack>
                     : <div>
                         <Text size="xl" inline>
-                            Drag image here or click to select file
+                            Attach a photo of the incident you want to report
                         </Text>
                         <Text size="sm" color="dimmed" inline mt={7}>
-                            Attach a photo of the incident you want to report
+                            Drag image here or click to select file
                         </Text>
                     </div>}
             </Group>
