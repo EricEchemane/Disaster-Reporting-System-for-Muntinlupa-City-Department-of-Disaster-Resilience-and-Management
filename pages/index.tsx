@@ -22,7 +22,7 @@ export default function HomePage() {
           </Title>
         </Group>
         <Link passHref href={'/report-incident'}>
-          <Button color={'red'} rightIcon={<IconArrowRight />} variant={'filled'} component={'a'}>
+          <Button color={'red'} rightIcon={<IconArrowRight />} variant={'outline'} component={'a'}>
             Report Incident
           </Button>
         </Link>
@@ -40,7 +40,7 @@ export default function HomePage() {
           </CopyButton>
         </Group>
         <Link passHref href={'/how-to-submit-report'}>
-          <Button rightIcon={<IconPlayerPlay />} variant={'light'} component={'a'}>
+          <Button rightIcon={<IconPlayerPlay />} variant={'subtle'} component={'a'}>
             Video Tutorial: How to submit a report?
           </Button>
         </Link>
