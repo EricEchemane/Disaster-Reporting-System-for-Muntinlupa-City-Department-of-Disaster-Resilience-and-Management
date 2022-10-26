@@ -10,6 +10,7 @@ import DropZoneComponent from 'components/DropZone';
 import { FileWithPath } from '@mantine/dropzone';
 import Http from 'http/adapter';
 import { Incident } from 'db/incident_report.schema';
+import Router from 'next/router';
 
 export default function ReportIncidentPage() {
     const [loading, setLoading] = useState(false);
@@ -44,8 +45,11 @@ export default function ReportIncidentPage() {
         };
         Http.post('/api/incident', payload, {
             loadingToggler: setLoading,
-            onFail: console.log,
-            onSuccess: console.log,
+            onFail: alert,
+            onSuccess: () => {
+                alert('Incident reported successfully. You will be redirected to the home page.');
+                Router.push('/');
+            },
         });
     };
 

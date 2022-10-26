@@ -12,7 +12,7 @@ const incidentSchema = new Schema({
         },
         required: true,
     },
-    dateReported: { type: Date, default: Date.now },
+    date: { type: Date, default: Date.now },
 });
 
 export type Incident = InferSchemaType<typeof incidentSchema>;

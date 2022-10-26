@@ -13,7 +13,7 @@ export default function DropZoneComponent(props: Partial<DropImageProps>) {
     return (
         <Dropzone
             color='red'
-            style={{ border: props.error ? '2px solid red' : '' }}
+            style={{ border: props.error ? '2px solid red' : '2px solid transparent' }}
             onDrop={(files) => console.log('accepted files', files)}
             onReject={(files) => console.log('rejected files', files)}
             maxSize={3 * 1024 ** 2}
