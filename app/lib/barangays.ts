@@ -10,4 +10,4 @@ const barangays: string[] = [
     'Alabang',
 ];
 
-export default Object.freeze(barangays);
+export default Object.freeze(barangays.sort());
