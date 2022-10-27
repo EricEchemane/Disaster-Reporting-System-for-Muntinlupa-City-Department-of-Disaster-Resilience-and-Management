@@ -3,6 +3,9 @@ import styles from "../styles/admin.module.css";
 import { Button, TextInput, Title } from '@mantine/core';
 import Head from 'next/head';
 import Http from 'http/adapter';
+import { Incident } from 'db/incident_report.schema';
+
+type IIncident = Incident & { _id: string; };
 
 export default function Admin() {
     const [loading, setLoading] = useState(false);
@@ -10,13 +13,15 @@ export default function Admin() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [incidents, setIncidents] = useState<IIncident[] | null>(null);
+
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         const payload = { username, password };
         Http.post('/api/login', payload, {
             loadingToggler: setLoading,
-            onFail: (err) => console.log(err),
-            onSuccess: (res) => console.log(res),
+            onFail: alert,
+            onSuccess: (res) => setIncidents(res.data),
         });
     };
 
