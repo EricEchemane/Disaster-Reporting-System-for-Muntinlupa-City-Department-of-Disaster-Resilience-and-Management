@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Http from 'http/adapter';
 
 export default function Admin() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -44,8 +44,8 @@ export default function Admin() {
                 placeholder='Password'
                 onChange={(e) => setPassword(e.currentTarget.value)}
                 value={password} />
-            <Button type='submit' size='lg' disabled={loading}>
-                {loading ? 'Logging in...' : 'Login'}
+            <Button type='submit' size='lg' loading={loading}>
+                {loading ? 'Logging in' : 'Login'}
             </Button>
         </form>
     </>;

@@ -130,7 +130,7 @@ export default function ReportIncidentPage() {
                         size='lg'
                         type='submit'
                         mt={'3rem'}
-                        disabled={loading}
+                        loading={loading}
                         fullWidth>
                         {loading ? 'Loading...' : 'Submit'}
                     </Button>
