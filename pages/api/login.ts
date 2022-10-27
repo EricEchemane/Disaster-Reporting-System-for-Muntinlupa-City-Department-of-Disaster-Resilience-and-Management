@@ -2,15 +2,15 @@ import normalize, { RequestError } from "http/response_normalizer";
 import { NextApiRequest } from "next";
 
 const brgyCredentials = new Map<string, string>([
-    ["alabang", "admin123"],
-    ["ayala alabang", "admin123"],
-    ["bayanan", "admin123"],
-    ["buli", "admin123"],
-    ["cupang", "admin123"],
-    ["poblacion", "admin123"],
-    ["putatan", "admin123"],
-    ["sucat", "admin123"],
-    ["tunasan", "admin123"],
+    ["Alabang", "admin123"],
+    ["Ayala Alabang", "admin123"],
+    ["Bayanan", "admin123"],
+    ["Buli", "admin123"],
+    ["Cupang", "admin123"],
+    ["Poblacion", "admin123"],
+    ["Putatan", "admin123"],
+    ["Sucat", "admin123"],
+    ["Tunasan", "admin123"],
 ]);
 
 async function handler(req: NextApiRequest) {
