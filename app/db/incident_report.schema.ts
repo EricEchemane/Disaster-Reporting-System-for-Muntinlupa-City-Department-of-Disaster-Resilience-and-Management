@@ -13,6 +13,7 @@ const incidentSchema = new Schema({
         required: true,
     },
     date: { type: Date, default: Date.now },
+    resolved: { type: Boolean, default: false },
 });
 
 export type Incident = InferSchemaType<typeof incidentSchema>;

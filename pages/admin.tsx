@@ -4,8 +4,9 @@ import { Button, TextInput, Title } from '@mantine/core';
 import Head from 'next/head';
 import Http from 'http/adapter';
 import { Incident } from 'db/incident_report.schema';
+import AdminDashboard from 'components/AdminDashboard';
 
-type IIncident = Incident & { _id: string; };
+export type IIncident = Incident & { _id: string; };
 
 export default function Admin() {
     const [loading, setLoading] = useState(false);
@@ -24,6 +25,8 @@ export default function Admin() {
             onSuccess: (res) => setIncidents(res.data),
         });
     };
+
+    if (incidents && username !== '') return <AdminDashboard incidents={incidents} brgy={username} />;
 
     return <>
         <Head>
