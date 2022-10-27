@@ -44,7 +44,7 @@ export default function AdminDashboard({ incidents, brgy }: Props) {
             <Table>
                 <thead>
                     <tr>
-                        <th> Time and Date </th>
+                        <th> Time and Date Reported </th>
                         <th> Incident Description </th>
                         <th> Report from: </th>
                         <th> Photo </th>
