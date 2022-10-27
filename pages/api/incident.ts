@@ -20,4 +20,4 @@ async function handler(req: NextApiRequest) {
     return newIncident;
 }
 
-export default normalize(handler, { protect: false });
+export default normalize(handler);

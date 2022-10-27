@@ -4,8 +4,6 @@ import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { NavigationProgress } from '@mantine/nprogress';
-// import UserContextProvider from 'contexts/user.context';
-import { SessionProvider } from 'next-auth/react';
 
 interface AppPropsWithSession extends AppProps {
   pageProps: { session: any; };
@@ -14,25 +12,21 @@ interface AppPropsWithSession extends AppProps {
 function MyApp({ Component, pageProps }: AppPropsWithSession) {
   return (
     <>
-      <SessionProvider session={pageProps.session}>
-        {/* <UserContextProvider> */}
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            /** Put your mantine theme override here */
-            colorScheme: 'light',
-            fontFamily: "Inter, sans-serif"
-          }}>
-          <ModalsProvider>
-            <NotificationsProvider>
-              <NavigationProgress />
-              <Component {...pageProps} />
-            </NotificationsProvider>
-          </ModalsProvider>
-        </MantineProvider>
-        {/* </UserContextProvider> */}
-      </SessionProvider>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: 'light',
+          fontFamily: "Inter, sans-serif"
+        }}>
+        <ModalsProvider>
+          <NotificationsProvider>
+            <NavigationProgress />
+            <Component {...pageProps} />
+          </NotificationsProvider>
+        </ModalsProvider>
+      </MantineProvider>
     </>
   );
 }
