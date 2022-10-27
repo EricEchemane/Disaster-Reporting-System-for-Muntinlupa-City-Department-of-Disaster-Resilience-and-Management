@@ -1,3 +1,4 @@
+import connectToDatabase from "db/connect";
 import normalize, { RequestError } from "http/response_normalizer";
 import { NextApiRequest } from "next";
 
@@ -22,7 +23,13 @@ async function handler(req: NextApiRequest) {
 
     if (brgy !== password) throw new RequestError(400, "Invalid credentials");
 
-    return { username };
+    const db = await connectToDatabase();
+    if (!db) throw new RequestError(500, "Database connection error");
+    const { Incident } = db.models;
+
+    const incidents = await Incident.find({ location: username });
+
+    return incidents;
 }
 
 export default normalize(handler, { protect: false });
