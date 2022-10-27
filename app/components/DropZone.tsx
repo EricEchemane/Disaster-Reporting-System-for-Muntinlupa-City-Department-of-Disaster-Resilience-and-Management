@@ -45,7 +45,7 @@ export default function DropZoneComponent(props: Partial<DropImageProps>) {
                             id='image'
                             src={props.imgsrc}
                             alt="soil image"
-                            style={{ height: '100%' }} />
+                            style={{ width: '100%' }} />
                         <Text align='center'>  Click again to choose different one </Text>
                     </Stack>
                     : <div>
