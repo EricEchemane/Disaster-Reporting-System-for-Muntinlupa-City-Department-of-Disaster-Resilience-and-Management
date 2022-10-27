@@ -11,9 +11,6 @@ export default async function connectToDatabase(): Promise<typeof mongoose | nul
         if (!process.env.MONGODB_URI) {
             throw new Error('MONGODB_URI not set');
         }
-        if (!process.env.DB_NAME) {
-            throw new Error('DB_NAME not set');
-        }
 
         if (!mongoose.models.Incident) mongoose.model('Incident', incidentSchema);
 
