@@ -18,6 +18,10 @@ export default function Admin() {
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
+        login();
+    };
+
+    const login = () => {
         const payload = { username, password };
         Http.post('/api/login', payload, {
             loadingToggler: setLoading,
@@ -26,7 +30,7 @@ export default function Admin() {
         });
     };
 
-    if (incidents && username !== '') return <AdminDashboard incidents={incidents} brgy={username} />;
+    if (incidents && username !== '') return <AdminDashboard login={login} incidents={incidents} brgy={username} />;
 
     return <>
         <Head>
