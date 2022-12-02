@@ -19,3 +19,13 @@ body {
     background: black;
   }
 }
+
+#tutorial {
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+#video-tutorial {
+  height: 85vh;
+}

@@ -6,8 +6,9 @@ export default function HomeToSubmitReportPage() {
         <Head>
             <title> How to Submit A Report </title>
         </Head>
-        <div>
-            <h1> Dito dapat magpeplay yung video Tutorial </h1>
+        <div id='tutorial'>
+            <h1> Please watch the tutorial below </h1>
+            <video muted id='video-tutorial' controls src="/tutorial.mp4"></video>
         </div>
     </>;
 }
